@@ -1,0 +1,133 @@
+package com.simplifica.api;
+
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+
+@Entity
+@Table(name = "metas")
+public class Meta {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id; // meta_id
+
+  /**
+   * @ManyToOne: Muitas metas podem estar ligadas a Uma Categoria.
+   * @JoinColumn(name = "categoria_id", nullable = true):
+   *                  A FK é opcional (nullable = true), permitindo metas gerais.
+   */
+  @ManyToOne
+  @JoinColumn(name = "categoria_id", nullable = true)
+  private Categoria categoria; // categoria_id
+
+  @Column(nullable = false, length = 255)
+  private String nome; // nome_meta
+
+  @Column(nullable = false, precision = 10, scale = 2)
+  private BigDecimal valorAlvo; // valor_alvo
+
+  /**
+   * O valor_atual será calculado pelo backend.
+   * Começa com 0.00 por padrão.
+   */
+  @Column(nullable = false, precision = 10, scale = 2)
+  private BigDecimal valorAtual = BigDecimal.ZERO; // valor_atual
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private PeriodoMeta periodo;
+
+  @Column
+  private Integer mes; // Pode ser nulo se o período for ANUAL
+
+  @Column(nullable = false)
+  private Integer ano;
+
+  @CreationTimestamp
+  @Column(nullable = false, updatable = false)
+  private LocalDateTime data_criacao;
+
+  // --- Enums ---
+  public enum PeriodoMeta {
+    MENSAL,
+    ANUAL
+  }
+
+  // --- Construtor, Getters e Setters ---
+  public Meta() {
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Categoria getCategoria() {
+    return categoria;
+  }
+
+  public void setCategoria(Categoria categoria) {
+    this.categoria = categoria;
+  }
+
+  public String getNome() {
+    return nome;
+  }
+
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
+
+  public BigDecimal getValorAlvo() {
+    return valorAlvo;
+  }
+
+  public void setValorAlvo(BigDecimal valorAlvo) {
+    this.valorAlvo = valorAlvo;
+  }
+
+  public BigDecimal getValorAtual() {
+    return valorAtual;
+  }
+
+  public void setValorAtual(BigDecimal valorAtual) {
+    this.valorAtual = valorAtual;
+  }
+
+  public PeriodoMeta getPeriodo() {
+    return periodo;
+  }
+
+  public void setPeriodo(PeriodoMeta periodo) {
+    this.periodo = periodo;
+  }
+
+  public Integer getMes() {
+    return mes;
+  }
+
+  public void setMes(Integer mes) {
+    this.mes = mes;
+  }
+
+  public Integer getAno() {
+    return ano;
+  }
+
+  public void setAno(Integer ano) {
+    this.ano = ano;
+  }
+
+  public LocalDateTime getData_criacao() {
+    return data_criacao;
+  }
+
+  public void setData_criacao(LocalDateTime data_criacao) {
+    this.data_criacao = data_criacao;
+  }
+}
