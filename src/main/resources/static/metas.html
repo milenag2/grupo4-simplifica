@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamentos e Metas</title>
+  
+  <link rel="stylesheet" href="style-metas.css">
+  <link rel="stylesheet" href="style-navbar.css"> 
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="dashboard.html" class="nav-logo">
+      <i class="fas fa-chart-pie"></i> 
+      <span>Simplifica</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="transacoes.html">Transações</a></li>
+      <li><a href="metas.html" class="active">Metas</a></li> 
+    </ul>
+  </header>
+
+  <div id="modal-meta-overlay" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2>Nova Meta Financeira</h2>
+        <button id="btn-fechar-meta" class="close-button">&times;</button>
+      </div>
+      
+      <form id="form-meta">
+        <div class="form-group">
+          <label for="nome">Nome da Meta</label>
+          <input type="text" id="nome" name="nome" placeholder="Ex: Casa Própria, Viagem..." required>
+        </div>
+        
+        <div class="form-group">
+          <label for="valorAlvo">Valor Alvo (R$)</label>
+          <input type="number" id="valorAlvo" name="valorAlvo" step="0.01" placeholder="Ex: 35000.00" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="periodo">Período da Meta</label>
+          <select id="periodo" name="periodo" required>
+            <option value="ANUAL">Anual</option>
+            <option value="MENSAL">Mensal</option>
+          </select>
+        </div>
+        
+        <div class="form-group" id="campo-mes" style="display: none;">
+          <label for="mes">Mês</label>
+          <select id="mes" name="mes">
+            <option value="1">Janeiro</option>
+            <option value="2">Fevereiro</option>
+            <option value="3">Março</option>
+            <option value="4">Abril</option>
+            <option value="5">Maio</option>
+            <option value="6">Junho</option>
+            <option value="7">Julho</option>
+            <option value="8">Agosto</option>
+            <option value="9">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ano">Ano</label>
+          <input type="number" id="ano" name="ano" placeholder="Ex: 2025" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="categoria">Associar a uma Categoria (Opcional)</label>
+          <select id="categoria" name="categoria">
+            <option value="">Nenhuma (Meta Geral de Economia)</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancelar-meta" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Meta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-economia-overlay" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2>Adicionar Economia</h2>
+        <button id="btn-fechar-economia" class="close-button">&times;</button>
+      </div>
+      <form id="form-economia">
+        <p>Este formulário será detalhado depois.</p>
+        <div class="modal-footer">
+          <button type="button" id="btn-cancelar-economia" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <header class="main-header">
+      <div>
+        <h1>Orçamentos e Metas</h1>
+        <p class="subtitle">Acompanhe suas metas financeiras e mantenha o controle.</p>
+      </div>
+      <div class="header-buttons">
+        <button id="btn-abrir-economia" class="btn btn-secondary">+ Adicionar Economia</button>
+        <button id="btn-abrir-meta" class="btn btn-primary-green">+ Nova Meta</button>
+      </div>
+    </header>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <i class="stat-icon fas fa-wallet" style="color: #28a745;"></i>
+        <div>
+          <span class="stat-label">Total Economizado</span>
+          <span id="stat-saldo" class="stat-value">R$ 0,00</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <i class="stat-icon fas fa-tasks" style="color: #007bff;"></i>
+        <div>
+          <span class="stat-label">Metas Ativas</span>
+          <span id="stat-metas" class="stat-value">0</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <i class="stat-icon fas fa-trophy" style="color: #ffc107;"></i>
+        <div>
+          <span class="stat-label">Taxa de Sucesso</span>
+          <span id="stat-sucesso" class="stat-value">--%</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <i class="stat-icon fas fa-calendar-alt" style="color: #6f42c1;"></i>
+        <div>
+          <span class="stat-label">Receita do Mês</span>
+          <span id="stat-receita-mes" class="stat-value">R$ 0,00</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="metas-list">
+      <h2>Suas Metas Financeiras</h2>
+      <div id="lista-metas-container">
+      </div>
+    </section>
+  </div> 
+
+  <script src="app-metas.js"></script>
+</body>
+</html>

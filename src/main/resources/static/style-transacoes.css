@@ -1,0 +1,255 @@
+/* --- Configurações Gerais --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f4f7f6;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 25px;
+}
+
+/* --- Botões Principais --- */
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95em;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #0056b3;
+  color: white;
+}
+.btn-primary:hover {
+  background-color: #004a91;
+  box-shadow: 0 2px 8px rgba(0, 86, 179, 0.3);
+}
+
+.btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+.btn-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+/* --- Header Principal e Filtros --- */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.main-header h1 {
+  color: #111;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+.filter-bar input,
+.filter-bar select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+.filter-bar input {
+  flex-grow: 1; 
+}
+
+/* --- Tabela de Transações --- */
+#tabela-section {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+}
+#tabela-section h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#tabela-transacoes {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#tabela-transacoes th,
+#tabela-transacoes td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#tabela-transacoes th {
+  color: #666;
+  font-size: 0.85em;
+  text-transform: uppercase;
+}
+
+/* "Tags" da Tabela (Pills) */
+.tag {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: bold;
+  display: inline-block;
+  background-color: #eee;
+  color: #555;
+}
+.tag.status-confirmada { background-color: #d4edda; color: #155724; }
+.tag.status-pendente  { background-color: #fff3cd; color: #856404; }
+.tag.categoria-salario       { background-color: #d1e7dd; color: #0f5132; }
+.tag.categoria-alimentacao { background-color: #f8d7da; color: #721c24; }
+.tag.categoria-transporte  { background-color: #cce5ff; color: #004085; }
+.tag.categoria-moradia     { background-color: #e2e3e5; color: #383d41; }
+.tag.categoria-lazer       { background-color: #d6d8f5; color: #20235a; }
+
+/* Cores de Valor */
+.valor-receita { color: #28a745; font-weight: bold; }
+.valor-despesa { color: #dc3545; font-weight: bold; }
+
+/* Botões de Ação da Tabela */
+.action-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  font-size: 1.1em;
+  margin-left: 10px;
+}
+.action-buttons .btn-delete:hover { color: #dc3545; }
+
+/* ============================================= */
+/* --- ESTILOS DO MODAL (Usado por várias páginas) --- */
+/* ============================================= */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 100;
+}
+
+.modal-overlay.ativo {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-container {
+  background: #ffffff; 
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.ativo .modal-container {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+.close-button {
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: #888;
+}
+
+/* --- Estilos do Formulário do Modal --- */
+#form-transacao, #form-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label, .tipo-toggle label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+/* Botões de Tipo (Receita/Despesa) */
+.tipo-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+.btn-tipo {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+}
+.btn-tipo.ativo-receita {
+  background-color: #d4edda;
+  border-color: #155724;
+  color: #155724;
+}
+.btn-tipo.ativo-despesa {
+  background-color: #f8d7da;
+  border-color: #721c24;
+  color: #721c24;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  margin-top: 10px;
+}

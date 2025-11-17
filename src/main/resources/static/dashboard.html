@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Financeiro</title>
+  
+  <!-- CSSs Globais -->
+  <link rel="stylesheet" href="style.css"> 
+  <link rel="stylesheet" href="style-navbar.css"> 
+  
+  <!-- CSS específico para esta página -->
+  <link rel="stylesheet" href="style-dashboard.css">
+  
+  <!-- Ícones (Font Awesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Biblioteca de Gráficos (Chart.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ============================================= -->
+  <!-- 1. CABEÇALHO DE NAVEGAÇÃO                   -->
+  <!-- ============================================= -->
+  <header class="navbar">
+    
+    <a href="dashboard.html" class="nav-logo">
+      <i class="fas fa-chart-pie"></i> 
+      <span>Simplifica</span>
+    </a>
+  
+    <!-- Links de Navegação com "Dashboard" ativo -->
+    <ul class="nav-links">
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="transacoes.html">Transações</a></li>
+      <li><a href="metas.html">Metas</a></li>
+      <!-- <li><a href="#">Relatórios</a></li> -->
+    </ul>
+  
+  </header>
+
+  <!-- ============================================= -->
+  <!-- 2. CONTEÚDO PRINCIPAL DO DASHBOARD          -->
+  <!-- ============================================= -->
+  <div class="container">
+    <header class="main-header">
+      <div>
+        <h1>Dashboard Financeiro</h1>
+        <p class="subtitle">Visão geral das suas finanças pessoais</p>
+      </div>
+    </header>
+
+    <!-- Cartões de Estatísticas -->
+    <section class="stats-grid">
+      
+      <div class="stat-card">
+        <i class="stat-icon fas fa-wallet" style="color: #28a745;"></i>
+        <div>
+          <span class="stat-label">Saldo Atual</span>
+          <span id="stat-saldo" class="stat-value">R$ 0,00</span>
+        </div>
+        <!-- <span class="stat-change text-green">+12,5% vs mês anterior</span> -->
+      </div>
+      
+      <div class="stat-card">
+        <i class="stat-icon fas fa-arrow-up" style="color: #007bff;"></i>
+        <div>
+          <span class="stat-label">Receitas do Mês</span>
+          <span id="stat-receitas-mes" class="stat-value">R$ 0,00</span>
+        </div>
+        <!-- <span class="stat-change text-green">+5,2% vs mês anterior</span> -->
+      </div>
+
+      <div class="stat-card">
+        <i class="stat-icon fas fa-arrow-down" style="color: #dc3545;"></i>
+        <div>
+          <span class="stat-label">Despesas do Mês</span>
+          <span id="stat-despesas-mes" class="stat-value">R$ 0,00</span>
+        </div>
+        <!-- <span class="stat-change text-red">-3,1% vs mês anterior</span> -->
+      </div>
+
+    </section>
+
+    <!-- Gráficos -->
+    <section class="charts-grid">
+      
+      <div class="chart-container">
+        <h3>Distribuição de Gastos</h3>
+        <!-- O JS vai desenhar o gráfico de pizza aqui -->
+        <canvas id="donutChart"></canvas>
+        <div id="donut-placeholder" class="chart-placeholder" style="display: none;">
+          <p>Não há dados de despesas para exibir no gráfico deste mês.</p>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <h3>Receitas vs Despesas (Histórico)</h3>
+        <div class="chart-placeholder">
+          <p>
+            Este gráfico de histórico (6 meses)
+            precisará de uma nova função na API do back-end.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+  </div> <!-- /container -->
+
+  <script src="app-dashboard.js"></script>
+</body>
+</html>
