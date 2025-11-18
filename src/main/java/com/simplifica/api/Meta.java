@@ -42,6 +42,9 @@ public class Meta {
   @Column
   private Integer mes; // Pode ser nulo se o período for ANUAL
 
+  @Column(length = 7) 
+  private String cor;
+
   @Column(nullable = false)
   private Integer ano;
 
@@ -113,6 +116,14 @@ public class Meta {
 
   public void setMes(Integer mes) {
     this.mes = mes;
+  }
+
+  public String getCor() {
+      return cor;
+   }
+
+  public void setCor(String cor) {
+      this.cor = cor;
   }
 
   public Integer getAno() {

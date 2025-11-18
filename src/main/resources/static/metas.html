@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orçamentos e Metas</title>
+  <title>Metas</title>
   
   <link rel="stylesheet" href="style-metas.css">
   <link rel="stylesheet" href="style-navbar.css"> 
@@ -80,6 +80,14 @@
           </select>
         </div>
 
+        <div class="form-group">
+          <label for="cor">Cor e Código</label>
+          <div class="color-picker-wrapper">
+            <input type="color" id="cor" name="cor" value="#3498db" style="cursor: pointer;">
+            <span id="hex-value" style="margin-left: 10px; font-family: monospace; font-weight: bold;">#3498db</span>
+          </div>
+        </div>
+
         <div class="modal-footer">
           <button type="button" id="btn-cancelar-meta" class="btn btn-secondary">Cancelar</button>
           <button type="submit" class="btn btn-primary">Salvar Meta</button>
@@ -95,9 +103,26 @@
         <button id="btn-fechar-economia" class="close-button">&times;</button>
       </div>
       <form id="form-economia">
-        <p>Este formulário será detalhado depois.</p>
+
+        <div class="form-group">
+          <label for="meta">Associar a uma Meta</label>
+          <select id="meta" name="meta">
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="economia">Valor Economizado</label>
+          <input type="text" id="economia" name="economia" placeholder="Ex: 200" required>
+        </div>
+
+        <div class="form-group">
+          <label for="data_economia">Data da Economia</label>
+          <input type="date" id="data_economia" name="data_economia" required>
+        </div>
+
         <div class="modal-footer">
           <button type="button" id="btn-cancelar-economia" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
       </form>
     </div>
@@ -106,7 +131,7 @@
   <div class="container">
     <header class="main-header">
       <div>
-        <h1>Orçamentos e Metas</h1>
+        <h1>Metas</h1>
         <p class="subtitle">Acompanhe suas metas financeiras e mantenha o controle.</p>
       </div>
       <div class="header-buttons">
@@ -147,9 +172,15 @@
     </section>
 
     <section class="metas-list">
-      <h2>Suas Metas Financeiras</h2>
+      <h2>Metas em Andamento</h2>
       <div id="lista-metas-container">
-      </div>
+        </div>
+    </section>
+
+    <section class="metas-list" style="margin-top: 40px; opacity: 0.8;">
+      <h2>Histórico (Concluídas ou Finalizadas)</h2>
+      <div id="lista-metas-concluidas-container">
+        </div>
     </section>
   </div> 
 
