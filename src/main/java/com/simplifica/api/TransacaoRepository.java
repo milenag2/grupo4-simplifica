@@ -9,8 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface TransacaoRepository extends CrudRepository<Transacao, Integer> {
 
-  // REMOVIDO: "AND t.status = 'CONFIRMADA'" de todas as queries abaixo
-
   @Query("SELECT COALESCE(SUM(t.valor), 0.0) FROM Transacao t WHERE t.tipo = 'RECEITA'")
   BigDecimal getSomaReceitasConfirmadas();
 

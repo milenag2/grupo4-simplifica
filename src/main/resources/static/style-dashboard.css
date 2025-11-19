@@ -1,4 +1,4 @@
-/* --- Estilos da Página do Dashboard --- */
+/* Dashboard */
 
 .main-header {
   margin-bottom: 25px;
@@ -12,7 +12,7 @@
   font-size: 1.1em;
 }
 
-/* --- Grid de Estatísticas --- */
+/* Estatísticas */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -57,15 +57,13 @@
 .text-green { color: #28a745; }
 .text-red   { color: #dc3545; }
 
-
-/* --- Grid de Gráficos --- */
+/* Gráficos */
 .charts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-/* Em telas menores, os gráficos ficam em 1 coluna */
 @media (max-width: 900px) {
   .charts-grid {
     grid-template-columns: 1fr;
@@ -83,11 +81,10 @@
   text-align: center;
 }
 
-/* Limita o tamanho dos gráficos (Donut e Histórico) */
 #donutChart, #historyChart {
   max-height: 350px;
   margin: 0 auto;
-  width: 100%; /* Garante que ocupe a largura disponível */
+  width: 100%; 
 }
 
 .chart-placeholder {

@@ -31,8 +31,6 @@ public class Transacao {
   @Column(nullable = false)
   private LocalDate data_transacao;
 
-  // (REMOVIDO O CAMPO STATUS AQUI)
-
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime data_criacao;
@@ -42,10 +40,10 @@ public class Transacao {
     DESPESA
   }
 
-  // --- Construtores ---
+  // Construtores
   public Transacao() {}
 
-  // --- Getters e Setters (Sem Status) ---
+  // Getters e Setters (Sem Status) 
   public Integer getId() { return id; }
   public void setId(Integer id) { this.id = id; }
 
