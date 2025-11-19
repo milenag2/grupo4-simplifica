@@ -83,10 +83,11 @@
   text-align: center;
 }
 
-/* Limita o tamanho do gráfico de Donut */
-#donutChart {
+/* Limita o tamanho dos gráficos (Donut e Histórico) */
+#donutChart, #historyChart {
   max-height: 350px;
   margin: 0 auto;
+  width: 100%; /* Garante que ocupe a largura disponível */
 }
 
 .chart-placeholder {

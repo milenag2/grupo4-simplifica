@@ -38,6 +38,16 @@ body {
   box-shadow: 0 2px 8px rgba(0, 86, 179, 0.3);
 }
 
+/* 👇 NOVO: Botão Verde para Nova Categoria */
+.btn-primary-green {
+  background-color: #1abc9c;
+  color: white;
+}
+.btn-primary-green:hover {
+  background-color: #16a085;
+  box-shadow: 0 2px 8px rgba(26, 188, 156, 0.3);
+}
+
 .btn-secondary {
   background-color: #f0f0f0;
   color: #333;
@@ -56,6 +66,10 @@ body {
 }
 .main-header h1 {
   color: #111;
+}
+.header-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 .filter-bar {
@@ -117,6 +131,7 @@ body {
 }
 .tag.status-confirmada { background-color: #d4edda; color: #155724; }
 .tag.status-pendente  { background-color: #fff3cd; color: #856404; }
+/* Exemplo de categorias padrão */
 .tag.categoria-salario       { background-color: #d1e7dd; color: #0f5132; }
 .tag.categoria-alimentacao { background-color: #f8d7da; color: #721c24; }
 .tag.categoria-transporte  { background-color: #cce5ff; color: #004085; }
@@ -139,7 +154,7 @@ body {
 .action-buttons .btn-delete:hover { color: #dc3545; }
 
 /* ============================================= */
-/* --- ESTILOS DO MODAL (Usado por várias páginas) --- */
+/* --- ESTILOS DO MODAL --- */
 /* ============================================= */
 
 .modal-overlay {
@@ -195,7 +210,8 @@ body {
 }
 
 /* --- Estilos do Formulário do Modal --- */
-#form-transacao, #form-meta {
+/* 👇 ATUALIZADO: Inclui #form-categoria na regra */
+#form-transacao, #form-meta, #form-categoria {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -233,6 +249,7 @@ body {
   cursor: pointer;
   font-size: 1em;
   font-weight: bold;
+  transition: all 0.2s;
 }
 .btn-tipo.ativo-receita {
   background-color: #d4edda;
@@ -252,4 +269,35 @@ body {
   border-top: 1px solid #eee;
   padding-top: 20px;
   margin-top: 10px;
+}
+
+/* 👇 NOVO: Estilos para o Seletor de Cores (Redondo) */
+.color-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+input[type="color"] {
+  border: none;
+  width: 50px;
+  height: 50px;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Webkit (Chrome, Edge, Safari) */
+input[type="color"]::-webkit-color-swatch {
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+/* Firefox */
+input[type="color"]::-moz-color-swatch {
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
 }

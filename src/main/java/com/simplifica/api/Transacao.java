@@ -12,18 +12,11 @@ public class Transacao {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id; // Transacaoid
+  private Integer id;
 
-  /**
-   * Esta é a Relação de Chave Estrangeira (FK).
-   * 
-   * @ManyToOne: Muitas transações podem pertencer a Uma Categoria.
-   * @JoinColumn(name = "categoria_id"): A coluna no banco que
-   *                  faz a ligação.
-   */
   @ManyToOne
-  @JoinColumn(name = "categoria_id", nullable = true) // Pode ser nula (ex: "sem categoria")
-  private Categoria categoria; // categoria_id
+  @JoinColumn(name = "categoria_id", nullable = true)
+  private Categoria categoria;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
@@ -38,90 +31,39 @@ public class Transacao {
   @Column(nullable = false)
   private LocalDate data_transacao;
 
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  private StatusTransacao status;
+  // (REMOVIDO O CAMPO STATUS AQUI)
 
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime data_criacao;
 
-  // --- Enums ---
   public enum TipoTransacao {
     RECEITA,
     DESPESA
   }
 
-  public enum StatusTransacao {
-    PENDENTE,
-    CONFIRMADA
-  }
+  // --- Construtores ---
+  public Transacao() {}
 
-  // --- Construtor, Getters e Setters ---
-  public Transacao() {
-  }
+  // --- Getters e Setters (Sem Status) ---
+  public Integer getId() { return id; }
+  public void setId(Integer id) { this.id = id; }
 
-  public Integer getId() {
-    return id;
-  }
+  public Categoria getCategoria() { return categoria; }
+  public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+  public TipoTransacao getTipo() { return tipo; }
+  public void setTipo(TipoTransacao tipo) { this.tipo = tipo; }
 
-  public Categoria getCategoria() {
-    return categoria;
-  }
+  public String getDescricao() { return descricao; }
+  public void setDescricao(String descricao) { this.descricao = descricao; }
 
-  public void setCategoria(Categoria categoria) {
-    this.categoria = categoria;
-  }
+  public BigDecimal getValor() { return valor; }
+  public void setValor(BigDecimal valor) { this.valor = valor; }
 
-  public TipoTransacao getTipo() {
-    return tipo;
-  }
+  public LocalDate getData_transacao() { return data_transacao; }
+  public void setData_transacao(LocalDate data_transacao) { this.data_transacao = data_transacao; }
 
-  public void setTipo(TipoTransacao tipo) {
-    this.tipo = tipo;
-  }
-
-  public String getDescricao() {
-    return descricao;
-  }
-
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
-  }
-
-  public BigDecimal getValor() {
-    return valor;
-  }
-
-  public void setValor(BigDecimal valor) {
-    this.valor = valor;
-  }
-
-  public LocalDate getData_transacao() {
-    return data_transacao;
-  }
-
-  public void setData_transacao(LocalDate data_transacao) {
-    this.data_transacao = data_transacao;
-  }
-
-  public StatusTransacao getStatus() {
-    return status;
-  }
-
-  public void setStatus(StatusTransacao status) {
-    this.status = status;
-  }
-
-  public LocalDateTime getData_criacao() {
-    return data_criacao;
-  }
-
-  public void setData_criacao(LocalDateTime data_criacao) {
-    this.data_criacao = data_criacao;
-  }
+  public LocalDateTime getData_criacao() { return data_criacao; }
+  public void setData_criacao(LocalDateTime data_criacao) { this.data_criacao = data_criacao; }
 }

@@ -6,35 +6,59 @@
   <title>Gestão de Transações</title>
   
   <link rel="stylesheet" href="style-transacoes.css">
-  
-  <!-- 1. ADICIONADO O CSS DA BARRA DE NAVEGAÇÃO -->
-  <link rel="stylesheet" href="style-navbar.css">
-  
+  <link rel="stylesheet" href="style-navbar.css"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<header class="navbar">
-  
-  <a href="dashboard.html" class="nav-logo">
-    <i class="fas fa-chart-pie"></i> 
-    <span>Simplifica</span>
-  </a>
-
-  <!-- 2. ADICIONADA A CLASSE "active" NO LINK DE TRANSAÇÕES -->
-  <ul class="nav-links">
-    <li><a href="dashboard.html">Dashboard</a></li>
-    <li><a href="transacoes.html" class="active">Transações</a></li>
-    <li><a href="metas.html">Metas</a></li>
+  <header class="navbar">
+    <a href="dashboard.html" class="nav-logo">
+      <i class="fas fa-chart-pie"></i> 
+      <span>Simplifica</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="transacoes.html" class="active">Transações</a></li>
+      <li><a href="metas.html">Metas</a></li>
     </ul>
+  </header>
 
-</header>
+  <div id="modal-categoria-overlay" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2>Nova Categoria</h2>
+        <button id="btn-fechar-categoria" class="close-button">&times;</button>
+      </div>
 
-  <!-- ============================================= -->
-  <!-- (O RESTO DO SEU CÓDIGO ORIGINAL COMEÇA AQUI) -->
-  <!-- ============================================= -->
+      <form id="form-categoria">
+        <div class="tipo-toggle">
+            <button type="button" class="btn-tipo" id="btn-tipo-receita-cat" data-tipo="RECEITA">Receita</button>
+            <button type="button" class="btn-tipo" id="btn-tipo-despesa-cat" data-tipo="DESPESA">Despesa</button>
+            <input type="hidden" id="tipo-cat" name="tipo">
+        </div>
+      
+        <div class="form-group">
+          <label for="nome">Nome da Categoria</label>
+          <input type="text" id="nome" name="nome" placeholder="Ex: Comida, Lazer..." required>
+        </div>
 
-  <div class="modal-overlay">
+        <div class="form-group">
+          <label for="cor">Cor e Código</label>
+          <div class="color-picker-wrapper">
+            <input type="color" id="cor" name="cor" value="#3498db" style="cursor: pointer;">
+            <span id="hex-value" style="margin-left: 10px; font-family: monospace; font-weight: bold;">#3498db</span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancelar-categoria" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Categoria</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-transacao-overlay" class="modal-overlay"> 
     <div class="modal-container">
       <div class="modal-header">
         <h2>Nova Transação</h2>
@@ -80,17 +104,25 @@
     </div>
   </div>
 
-
   <div class="container">
     <header class="main-header">
       <h1>Gestão de Transações</h1>
-      <button id="btn-abrir-modal" class="btn btn-primary">+ Adicionar Transação</button>
+      <div class="header-buttons">
+        <button id="btn-abrir-transacao" class="btn btn-primary">+ Adicionar Transação</button>
+        <button id="btn-abrir-categoria" class="btn btn-primary-green">+ Nova Categoria</button>
+      </div>
     </header>
 
     <div class="filter-bar">
-      <input type="text" placeholder="Buscar transações...">
-      <select><option>Todas as categorias</option></select>
-      <select><option>Todos os tipos</option></select>
+      <select id="filtro-categoria">
+        <option value="">Todas as categorias</option>
+      </select>
+      
+      <select id="filtro-tipo">
+        <option value="">Todos os tipos</option>
+        <option value="RECEITA">Receitas</option>
+        <option value="DESPESA">Despesas</option>
+      </select>
     </div>
 
     <section id="tabela-section">
@@ -102,16 +134,15 @@
             <th>Descrição</th>
             <th>Valor</th>
             <th>Categoria</th>
-            <th>Status</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody id="tabela-corpo">
-          </tbody>
+        </tbody>
       </table>
     </section>
-
   </div> 
+  
   <script src="app.js"></script>
 </body>
 </html>
