@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.stream.Collectors;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +18,6 @@ public class DashboardController {
 
   @Autowired
   private TransacaoRepository transacaoRepository;
-
-  @Autowired
-  private MetaRepository metaRepository;
 
   @GetMapping("/saldo")
   public ResponseEntity<Map<String, BigDecimal>> getSaldoAtual() {
@@ -52,11 +48,6 @@ public class DashboardController {
 
     List<CategoriaGasto> distribuicao = transacaoRepository.getDistribuicaoDespesasPorCategoria(mes, ano);
     resumo.put("distribuicao_por_categoria_mes", distribuicao);
-
-    Map<String, BigDecimal> gastosPorCategoria = distribuicao.stream()
-        .collect(Collectors.toMap(
-            CategoriaGasto::getCategoriaNome,
-            CategoriaGasto::getTotal));
 
     return ResponseEntity.ok(resumo);
 
