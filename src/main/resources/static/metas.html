@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Metas</title>
-  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="style-metas.css">
-  <link rel="stylesheet" href="style-navbar.css"> 
-  
+  <link rel="stylesheet" href="style-navbar.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
 
   <header class="navbar">
     <a href="dashboard.html" class="nav-logo">
-      <i class="fas fa-chart-pie"></i> 
+      <i class="fas fa-chart-pie"></i>
       <span>Simplifica</span>
     </a>
     <ul class="nav-links">
       <li><a href="dashboard.html">Dashboard</a></li>
       <li><a href="transacoes.html">Transações</a></li>
-      <li><a href="metas.html" class="active">Metas</a></li> 
+      <li><a href="metas.html" class="active">Metas</a></li>
     </ul>
   </header>
 
@@ -30,18 +32,18 @@
         <h2>Nova Meta Financeira</h2>
         <button id="btn-fechar-meta" class="close-button">&times;</button>
       </div>
-      
+
       <form id="form-meta">
         <div class="form-group">
           <label for="nome">Nome da Meta</label>
           <input type="text" id="nome" name="nome" placeholder="Ex: Casa Própria, Viagem..." required>
         </div>
-        
+
         <div class="form-group">
           <label for="valorAlvo">Valor Alvo (R$)</label>
           <input type="number" id="valorAlvo" name="valorAlvo" step="0.01" placeholder="Ex: 35000.00" required>
         </div>
-        
+
         <div class="form-group">
           <label for="periodo">Período da Meta</label>
           <select id="periodo" name="periodo" required>
@@ -49,7 +51,7 @@
             <option value="MENSAL">Mensal</option>
           </select>
         </div>
-        
+
         <div class="form-group" id="campo-mes" style="display: none;">
           <label for="mes">Mês</label>
           <select id="mes" name="mes">
@@ -72,7 +74,7 @@
           <label for="ano">Ano</label>
           <input type="number" id="ano" name="ano" placeholder="Ex: 2025" required>
         </div>
-        
+
         <div class="form-group">
           <label for="categoria">Associar a uma Categoria (Opcional)</label>
           <select id="categoria" name="categoria">
@@ -165,7 +167,7 @@
       <div class="stat-card">
         <i class="stat-icon fas fa-calendar-alt" style="color: #6f42c1;"></i>
         <div>
-          <span class="stat-label">Receita do Mês</span>
+          <span class="stat-label">Economia do Mês</span>
           <span id="stat-receita-mes" class="stat-value">R$ 0,00</span>
         </div>
       </div>
@@ -174,16 +176,17 @@
     <section class="metas-list">
       <h2>Metas em Andamento</h2>
       <div id="lista-metas-container">
-        </div>
+      </div>
     </section>
 
     <section class="metas-list" style="margin-top: 40px; opacity: 0.8;">
       <h2>Histórico (Concluídas ou Finalizadas)</h2>
       <div id="lista-metas-concluidas-container">
-        </div>
+      </div>
     </section>
-  </div> 
+  </div>
 
   <script src="app-metas.js"></script>
 </body>
+
 </html>
