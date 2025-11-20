@@ -53,28 +53,10 @@ public class DashboardController {
     List<CategoriaGasto> distribuicao = transacaoRepository.getDistribuicaoDespesasPorCategoria(mes, ano);
     resumo.put("distribuicao_por_categoria_mes", distribuicao);
 
-    List<Meta> metasRelevantes = metaRepository.findMetasRelevantes(ano, mes);
-
     Map<String, BigDecimal> gastosPorCategoria = distribuicao.stream()
         .collect(Collectors.toMap(
             CategoriaGasto::getCategoriaNome,
             CategoriaGasto::getTotal));
-
-    for (Meta meta : metasRelevantes) {
-
-      if (meta.getCategoria() != null) {
-        String nomeCategoria = meta.getCategoria().getNome();
-
-        BigDecimal gasto = gastosPorCategoria.getOrDefault(nomeCategoria, BigDecimal.ZERO);
-
-        meta.setValorAtual(gasto);
-
-      } else {
-        meta.setValorAtual(receitasMes);
-      }
-    }
-
-    resumo.put("progresso_metas_mes", metasRelevantes);
 
     return ResponseEntity.ok(resumo);
 
