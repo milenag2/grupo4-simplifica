@@ -142,4 +142,4 @@ A aplicação expõe uma API RESTful na porta 8080:
 
 ---
 
-**Desenvolvido com 💙 pelo Grupo 4**
+**Desenvolvido pelo Grupo 4 - Alencar, Franco Lara e Gallotte**
