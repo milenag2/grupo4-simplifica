@@ -97,7 +97,7 @@ cd grupo4-simplifica
 
 # (No Linux/Mac):
 ./gradlew bootRun
-
+```
 ### 3. Acessar o Sistema
 Abra o seu navegador e acesse:
 
