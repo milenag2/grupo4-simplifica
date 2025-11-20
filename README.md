@@ -1,95 +1,145 @@
-# Simplifica - Gerenciador Financeiro
+# 💰 Simplifica - Gerenciador Financeiro Pessoal
 
-O Simplifica é uma aplicação web de gerenciamento financeiro pessoal que ajuda você a organizar suas finanças, controlar suas transações e alcançar suas metas de economia de forma simples e intuitiva.
+**Simplifica** é uma aplicação web para controle financeiro, desenvolvida para ajudar usuários a organizarem suas receitas, despesas e metas de economia de forma visual e intuitiva.
 
-## Visão Geral
+O projeto utiliza uma arquitetura com **Spring Boot** no backend (API REST) e uma interface **Frontend** limpa e responsiva utilizando HTML5, CSS3 e JavaScript.
 
-Com o Simplifica, você pode:
-- **Acompanhar suas Transações:** Registre todas as suas receitas e despesas em um só lugar.
-- **Definir Metas de Economia:** Crie metas personalizadas, como "Viagem de Férias" ou "Carro Novo", e acompanhe seu progresso.
-- **Organizar com Categorias:** Classifique suas transações em categorias para entender melhor seus hábitos de consumo.
-- **Visualizar seu Desempenho:** Um dashboard amigável mostra um resumo da sua saúde financeira, incluindo saldo atual, economias do mês e o progresso das suas metas.
+---
 
-## Funcionalidades Principais
+## 🚀 Funcionalidades
 
-- **Dashboard:** Visão geral e instantânea das suas finanças.
-  - Saldo total economizado.
-  - Total de economias no mês atual.
-  - Número de metas ativas.
-  - Percentual de sucesso no alcance das metas.
-  - Gráficos para visualizar a distribuição de despesas e o progresso ao longo do tempo.
+### 📊 Dashboard
+- **Visão Geral:** Cards com Saldo Atual, Total de Receitas e Despesas do mês.
+- **Gráficos:**
+  - **Donut:** Distribuição de gastos do mês por categoria.
+  - **Barras:** Histórico comparativo de Receitas vs. Despesas dos últimos 6 meses.
 
-- **Metas:**
-  - Crie metas de economia com valor alvo e prazo (anual ou mensal).
-  - Acompanhe o valor já economizado para cada meta.
-  - Visualize o progresso através de barras percentuais.
-  - As metas são movidas para o histórico quando são concluídas ou quando o prazo expirar.
+### 💸 Gestão de Transações
+- Cadastro de Receitas e Despesas.
+- Associação com categorias personalizadas.
+- Filtros dinâmicos por Tipo e Categoria.
+- Listagem com indicação visual de valores (Verde/Vermelho).
+- Exclusão de transações.
 
-- **Transações:**
-  - Adicione novas receitas ou despesas.
-  - Associe uma categoria para uma transação.
-  - Filtre suas transações por tipo (receita/despesa) ou categoria.
-  - Exclua transações existentes.
+### 🎯 Metas Financeiras
+- Criação de metas de economia (Mensais ou Anuais).
+- Associação opcional a uma categoria específica (ex: "Juntar dinheiro para um evento de Lazer").
+- **Barra de Progresso:** Visualização em tempo real do quanto foi atingido da meta.
+- **Adicionar Economia:** Funcionalidade para lançar valores poupados manualmente em uma meta.
+- Separação automática entre Metas Ativas e Histórico (Concluídas/Vencidas).
 
-- **Categorias:**
-  - Crie categorias personalizadas para receitas e despesas.
-  - Atribua cores a cada categoria para fácil identificação.
+### 🏷️ Categorias
+- O sistema inicia com categorias padrão (Alimentação, Moradia, Transporte, Lazer, Salário).
+- Possibilidade de criar novas categorias com cores personalizadas.
 
-## Tecnologias Utilizadas
+---
+
+## 🛠️ Tecnologias Utilizadas
 
 ### Backend
-- **Java 17**
-- **Spring Boot 3**
-- **Spring Data JPA**
-- **Maven**
+- **Java 21**
+- **Spring Boot 3.4.11**
+- **Spring Data JPA** (Hibernate)
+- **MySQL Connector** (Banco de Dados)
+- **Gradle** (Gerenciamento de Dependências e Build)
 
 ### Frontend
-- **HTML5**
-- **CSS3**
-- **JavaScript**
+- **HTML5 & CSS3** (Layout responsivo e Modais personalizados)
+- **JavaScript (ES6+)** (Lógica de consumo da API e manipulação do DOM)
+- **Chart.js** (Renderização de gráficos)
+- **FontAwesome** (Ícones)
 
-## Como Executar o Projeto
+---
 
-### Pré-requisitos
-- JDK 17 ou superior
-- Maven 3.8 ou superior
+## ⚙️ Pré-requisitos
 
-### Passos
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/seu-usuario/grupo4-simplifica.git
-   cd grupo4-simplifica
-   ```
+Antes de começar, você precisa ter instalado em sua máquina:
 
-2. **Execute a aplicação backend:**
-   - Você pode executar a aplicação através da sua IDE (Eclipse, IntelliJ) ou via linha de comando usando o Maven.
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-   O servidor estará rodando em `http://localhost:8080`.
+1.  **Java JDK 21** (Necessário, conforme definido no `build.gradle`).
+2.  **MySQL Server** (Recomenda-se o uso do **XAMPP** ou MySQL Workbench).
+3.  **Git**.
 
-3. **Acesse o frontend:**
-   - Abra seu navegador e acesse as páginas da aplicação:
-     - **Dashboard:** `http://localhost:8080/dashboard.html`
-     - **Metas:** `http://localhost:8080/metas.html`
-     - **Transações:** `http://localhost:8080/transacoes.html`
+---
 
-## Estrutura do Projeto
+## 🚀 Como Executar o Projeto
 
-```
-.
-├── src
-│   ├── main
-│   │   ├── java/com/simplifica/api
-│   │   │   ├── controller/      # Controladores REST
-│   │   │   ├── model/           # Entidades JPA
-│   │   │   ├── repository/      # Repositórios Spring Data
-│   │   │   └── ApiApplication.java # Classe principal
-│   │   └── resources
-│   │       ├── static/          # Arquivos frontend (HTML, CSS, JS)
-│   │       └── application.properties # Configurações da aplicação
-│   └── test/                    # Testes
-├── .gitignore
-├── build.gradle                 # Configuração do build
-└── README.md
-```
+### 1. Configurar o Banco de Dados
+O projeto espera um banco de dados MySQL rodando na porta `3306`.
+
+1.  Abra o seu gerenciador MySQL (ex: phpMyAdmin no XAMPP).
+2.  Crie um novo banco de dados vazio chamado:
+    ```sql
+    CREATE DATABASE simplifica_db;
+    ```
+    *(Não é necessário criar tabelas, o Hibernate fará isso automaticamente).*
+
+3.  Verifique o arquivo `src/main/resources/application.properties`. A configuração padrão é:
+    ```properties
+    spring.datasource.username=root
+    spring.datasource.password=
+    ```
+    *Se o seu MySQL tiver senha, altere este arquivo.*
+
+### 2. Clonar e Rodar a Aplicação
+
+Abra o terminal (ou PowerShell) e siga os passos:
+
+```bash
+# 1. Clone o repositório
+git clone [https://github.com/milenag2/grupo4-simplifica.git](https://github.com/milenag2/grupo4-simplifica.git)
+
+# 2. Entre na pasta do projeto
+cd grupo4-simplifica
+
+# 3. Execute a aplicação usando o Gradle Wrapper
+# (No Windows):
+.\gradlew bootRun
+
+# (No Linux/Mac):
+./gradlew bootRun
+
+### 3. Acessar o Sistema
+Abra o seu navegador e acesse:
+
+👉 **http://localhost:8080**
+
+---
+
+## 📂 Estrutura do Projeto
+grupo4-simplifica/
+├── src/main/java/com/simplifica/api/
+│   ├── controllers       # Controladores REST (Endpoints)
+│   ├── models            # Entidades do Banco de Dados (Transacao, Meta, Categoria)
+│   ├── repositories      # Interfaces de acesso ao BD (JPA)
+│   ├── CorsConfig.java   # Configuração de segurança CORS
+│   └── DataSeeder.java   # Popula o banco com categorias iniciais
+│
+├── src/main/resources/
+│   ├── application.properties # Configuração do Banco de Dados
+│   └── static/           # Arquivos do Frontend
+│       ├── *.html        # Páginas (Dashboard, Transações, Metas)
+│       ├── *.css         # Estilos
+│       ├── *.js          # Lógica do Frontend
+│       └── favicon.ico   # Ícone do site
+│
+└── build.gradle          # Dependências do Projeto
+
+---
+
+## 📡 Documentação da API (Endpoints Principais)
+
+A aplicação expõe uma API RESTful na porta 8080:
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| **GET** | `/dashboard/resumo-principal` | Retorna saldo, totais do mês e dados para gráficos. |
+| **GET** | `/transacoes` | Lista todas as transações. |
+| **POST** | `/transacoes` | Cria uma nova receita ou despesa. |
+| **GET** | `/metas` | Lista todas as metas financeiras. |
+| **POST** | `/metas` | Cria uma nova meta. |
+| **POST** | `/economias` | Adiciona um valor economizado a uma meta. |
+| **GET** | `/categorias` | Lista todas as categorias disponíveis. |
+
+---
+
+**Desenvolvido com 💙 pelo Grupo 4**

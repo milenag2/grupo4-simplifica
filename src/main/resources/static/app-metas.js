@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       categorias.forEach(categoria => {
         const option = document.createElement("option");
         option.value = categoria.id;
-        option.textContent = `${categoria.nome} (${categoria.tipo})`;
+        option.textContent = `${categoria.nome}`;
         selectCategoria.appendChild(option);
       });
     } catch (error) { console.error(error); }
@@ -139,9 +139,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return parseInt(ano) === anoAtual && parseInt(mes) === mesAtual;
       });
       const totalEconomizadoMes = economiasDoMes.reduce((total, item) => total + item.economia, 0);
+      const metasContadorAtivas = todasAsMetas.filter(meta => {
+        if (meta.ano > anoAtual) return true;
 
-      const metasContadorAtivas = todasAsMetas.filter(meta => meta.ano >= anoAtual);
+        if (meta.ano < anoAtual) return false;
 
+        if (meta.periodo === 'MENSAL') {
+          return meta.mes >= mesAtual;
+        }
+
+        return true;
+      });
       const totalCriadas = todasAsMetas.length;
       const totalConcluidas = todasAsMetas.filter(m => m.valorAtual >= m.valorAlvo).length;
 
@@ -152,8 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       statSaldo.textContent = formatadorBRL.format(totalEconomizado || 0);
       statReceitaMes.textContent = formatadorBRL.format(totalEconomizadoMes || 0);
-      statMetas.textContent = `${metasContadorAtivas.length} ativas`;
-
+      statMetas.textContent = `${metasContadorAtivas.length} ${metasContadorAtivas.length === 1 ? 'ativa' : 'ativas'}`;
       statSucesso.textContent = `${taxaSucesso.toFixed(0)}%`;
 
 
