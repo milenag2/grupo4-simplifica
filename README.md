@@ -106,6 +106,8 @@ Abra o seu navegador e acesse:
 ---
 
 ## 📂 Estrutura do Projeto
+
+```bash
 grupo4-simplifica/
 ├── src/main/java/com/simplifica/api/
 │   ├── controllers       # Controladores REST (Endpoints)
@@ -123,7 +125,7 @@ grupo4-simplifica/
 │       └── favicon.ico   # Ícone do site
 │
 └── build.gradle          # Dependências do Projeto
-
+```
 ---
 
 ## 📡 Documentação da API (Endpoints Principais)
