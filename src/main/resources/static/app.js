@@ -1,59 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
-  
-  // URLs
   const API_URL = "http://localhost:8080";
   const CATEGORIAS_URL = `${API_URL}/categorias`;
   const TRANSACOES_URL = `${API_URL}/transacoes`;
 
-  // Variáveis Globais
-  let todasCategorias = []; 
-  let todasTransacoes = []; 
+  let todasCategorias = [];
+  let todasTransacoes = [];
 
-  // --- Elementos de Filtro (Sem inputBusca) ---
   const filtroCategoria = document.getElementById("filtro-categoria");
   const filtroTipo = document.getElementById("filtro-tipo");
 
-  // --- Elementos da Tabela ---
   const tabelaCorpo = document.getElementById("tabela-corpo");
 
-  // Listeners de Filtro
-  if(filtroCategoria) filtroCategoria.addEventListener("change", aplicarFiltros);
-  if(filtroTipo) filtroTipo.addEventListener("change", aplicarFiltros);
+  if (filtroCategoria) filtroCategoria.addEventListener("change", aplicarFiltros);
+  if (filtroTipo) filtroTipo.addEventListener("change", aplicarFiltros);
 
-  // --- Função de Filtro Simplificada ---
   function aplicarFiltros() {
     const categoriaNomeSelecionada = filtroCategoria ? filtroCategoria.value : "";
     const tipoSelecionado = filtroTipo ? filtroTipo.value : "";
 
     const transacoesFiltradas = todasTransacoes.filter(t => {
-      // 1. Filtro de Categoria (Pelo Nome)
       let matchCategoria = true;
       if (categoriaNomeSelecionada !== "") {
-          matchCategoria = t.categoria && t.categoria.nome === categoriaNomeSelecionada;
+        matchCategoria = t.categoria && t.categoria.nome === categoriaNomeSelecionada;
       }
-      
-      // 2. Filtro de Tipo
+
       const matchTipo = tipoSelecionado === "" || t.tipo === tipoSelecionado;
 
-      // Retorna se ambos coincidirem
       return matchCategoria && matchTipo;
     });
 
     renderizarTabela(transacoesFiltradas);
   }
 
-  // --- Renderizar Tabela ---
   function renderizarTabela(listaTransacoes) {
     if (!tabelaCorpo) return;
-    tabelaCorpo.innerHTML = ""; 
+    tabelaCorpo.innerHTML = "";
 
     if (listaTransacoes.length === 0) {
-        tabelaCorpo.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#666;">Nenhuma transação encontrada.</td></tr>`;
-        return;
+      tabelaCorpo.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#666;">Nenhuma transação encontrada.</td></tr>`;
+      return;
     }
 
     listaTransacoes.forEach(transacao => {
-        adicionarTransacaoNaTabela(transacao);
+      adicionarTransacaoNaTabela(transacao);
     });
   }
 
@@ -61,19 +50,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const isReceita = transacao.tipo === 'RECEITA';
     const classeValor = isReceita ? 'valor-receita' : 'valor-despesa';
     const prefixoValor = isReceita ? '+' : '-';
-    
+
     const valorFormatado = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(transacao.valor);
-    
+
     let dataFormatada = 'Data Inválida';
-    if(transacao.data_transacao) {
-        const [ano, mes, dia] = transacao.data_transacao.split('-');
-        dataFormatada = `${dia}/${mes}/${ano}`;
+    if (transacao.data_transacao) {
+      const [ano, mes, dia] = transacao.data_transacao.split('-');
+      dataFormatada = `${dia}/${mes}/${ano}`;
     }
 
     const categoriaNome = transacao.categoria ? transacao.categoria.nome : 'N/A';
-    const catStyle = (transacao.categoria && transacao.categoria.cor) 
-        ? `background-color: ${transacao.categoria.cor}; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2);` 
-        : 'background-color: #eee; color: #555;';
+    const catStyle = (transacao.categoria && transacao.categoria.cor)
+      ? `background-color: ${transacao.categoria.cor}; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2);`
+      : 'background-color: #eee; color: #555;';
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -90,27 +79,24 @@ document.addEventListener("DOMContentLoaded", () => {
     tabelaCorpo.appendChild(tr);
   }
 
-  // =================================================
-  // --- LÓGICA DE CATEGORIAS (Modal) ---
-  // =================================================
   const modalCategoriaOverlay = document.getElementById("modal-categoria-overlay");
   const formCategoria = document.getElementById("form-categoria");
   const btnAbrirCategoria = document.getElementById("btn-abrir-categoria");
   const btnFecharCategoria = document.getElementById("btn-fechar-categoria");
   const btnCancelarCategoria = document.getElementById("btn-cancelar-categoria");
-  
+
   const btnReceitaCat = document.getElementById("btn-tipo-receita-cat");
   const btnDespesaCat = document.getElementById("btn-tipo-despesa-cat");
   const inputTipoCat = document.getElementById("tipo-cat");
-  
+
   const inputCor = document.getElementById("cor");
   const spanHex = document.getElementById("hex-value");
 
   function abrirModalCategoria() {
     modalCategoriaOverlay.classList.add("ativo");
     formCategoria.reset();
-    selecionarTipoCategoria('RECEITA'); 
-    if(spanHex) { spanHex.textContent = "#3498db"; spanHex.style.color = "#3498db"; }
+    selecionarTipoCategoria('RECEITA');
+    if (spanHex) { spanHex.textContent = "#3498db"; spanHex.style.color = "#3498db"; }
   }
 
   function fecharModalCategoria() {
@@ -133,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnCancelarCategoria) btnCancelarCategoria.addEventListener("click", fecharModalCategoria);
   if (btnReceitaCat) btnReceitaCat.addEventListener("click", () => selecionarTipoCategoria('RECEITA'));
   if (btnDespesaCat) btnDespesaCat.addEventListener("click", () => selecionarTipoCategoria('DESPESA'));
-  
+
   if (inputCor && spanHex) {
     inputCor.addEventListener("input", () => {
       spanHex.textContent = inputCor.value;
@@ -160,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!response.ok) throw new Error("Falha ao salvar categoria.");
         alert("Categoria criada com sucesso!");
         fecharModalCategoria();
-        carregarCategorias(); 
+        carregarCategorias();
       } catch (error) {
         console.error("Erro:", error);
         alert("Erro ao criar categoria.");
@@ -168,17 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =================================================
-  // --- LÓGICA DE TRANSAÇÕES (Modal) ---
-  // =================================================
-  const modalTransacaoOverlay = document.getElementById("modal-transacao-overlay") || document.querySelector(".modal-overlay"); 
+  const modalTransacaoOverlay = document.getElementById("modal-transacao-overlay") || document.querySelector(".modal-overlay");
   const formTransacao = document.getElementById("form-transacao");
   const btnAbrirTransacao = document.getElementById("btn-abrir-transacao");
   const btnFecharTransacao = document.getElementById("btn-fechar-modal");
   const btnCancelarTransacao = document.getElementById("btn-cancelar");
   const btnReceitaTrans = document.getElementById("btn-tipo-receita");
   const btnDespesaTrans = document.getElementById("btn-tipo-despesa");
-  const inputTipoTrans = document.getElementById("tipo"); 
+  const inputTipoTrans = document.getElementById("tipo");
   const selectCategoria = document.getElementById("categoria");
 
   function abrirModalTransacao() {
@@ -210,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     categoriasFiltradas.forEach(cat => {
       const option = document.createElement("option");
       option.value = cat.id;
-      option.textContent = cat.nome; 
+      option.textContent = cat.nome;
       selectCategoria.appendChild(option);
     });
   }
@@ -227,13 +210,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (formTransacao) {
     formTransacao.addEventListener("submit", async (event) => {
-      event.preventDefault(); 
+      event.preventDefault();
       const formData = new FormData(formTransacao);
       const transacaoData = {
         descricao: formData.get("descricao"),
         valor: parseFloat(formData.get("valor")),
-        data_transacao: formData.get("data_transacao"), 
-        tipo: formData.get("tipo"), 
+        data_transacao: formData.get("data_transacao"),
+        tipo: formData.get("tipo"),
         categoria: { id: parseInt(formData.get("categoria")) }
       };
       try {
@@ -243,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(transacaoData),
         });
         if (!response.ok) throw new Error("Falha ao salvar transação.");
-        carregarTransacoes(); 
+        carregarTransacoes();
         fecharModalTransacao();
       } catch (error) {
         console.error("Erro:", error);
@@ -252,29 +235,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =================================================
-  // --- API LOADERS ---
-  // =================================================
 
   async function carregarCategorias() {
     try {
       const response = await fetch(CATEGORIAS_URL);
       if (!response.ok) throw new Error("Falha ao carregar categorias.");
-      
+
       todasCategorias = await response.json();
 
-      // 1. Popula o filtro de Categorias (Topo)
-      if(filtroCategoria) {
+      if (filtroCategoria) {
         filtroCategoria.innerHTML = '<option value="">Todas as categorias</option>';
         todasCategorias.forEach(cat => {
-            const option = document.createElement("option");
-            option.value = cat.nome; // Filtra pelo Nome
-            option.textContent = cat.nome;
-            filtroCategoria.appendChild(option);
+          const option = document.createElement("option");
+          option.value = cat.nome;
+          option.textContent = cat.nome;
+          filtroCategoria.appendChild(option);
         });
       }
 
-      // 2. Atualiza o select do modal (padrão Receita)
       const tipoAtual = inputTipoTrans ? inputTipoTrans.value : 'RECEITA';
       atualizarSelectCategorias(tipoAtual || 'RECEITA');
 
@@ -285,14 +263,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function carregarTransacoes() {
     try {
-      const response = await fetch(TRANSACOES_URL); 
+      const response = await fetch(TRANSACOES_URL);
       if (!response.ok) throw new Error("Erro na API Transações");
       todasTransacoes = await response.json();
-      
-      // Ordena
+
       todasTransacoes.sort((a, b) => new Date(b.data_transacao) - new Date(a.data_transacao));
-      
-      // Renderiza (com filtro padrão vazio = mostra tudo)
+
       aplicarFiltros();
 
     } catch (error) {
@@ -300,19 +276,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // DELETE
   if (tabelaCorpo) {
     tabelaCorpo.addEventListener("click", async (event) => {
       const deleteButton = event.target.closest(".btn-delete");
       if (!deleteButton) return;
-      const id = deleteButton.dataset.id; 
+      const id = deleteButton.dataset.id;
       if (confirm(`Tem certeza que deseja excluir a transação?`)) {
         try {
           const response = await fetch(`${TRANSACOES_URL}/${id}`, { method: "DELETE" });
           if (!response.ok) throw new Error("Falha ao deletar.");
-          
+
           todasTransacoes = todasTransacoes.filter(t => t.id != id);
-          aplicarFiltros(); 
+          aplicarFiltros();
         } catch (error) {
           console.error("Erro:", error);
           alert("Não foi possível deletar.");

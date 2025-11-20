@@ -1,4 +1,3 @@
-/* --- Configurações Gerais --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -18,7 +17,6 @@ body {
   padding: 25px;
 }
 
-/* --- Botões Principais --- */
 .btn {
   padding: 10px 18px;
   border: none;
@@ -33,16 +31,17 @@ body {
   background-color: #0056b3;
   color: white;
 }
+
 .btn-primary:hover {
   background-color: #004a91;
   box-shadow: 0 2px 8px rgba(0, 86, 179, 0.3);
 }
 
-/* 👇 NOVO: Botão Verde para Nova Categoria */
 .btn-primary-green {
   background-color: #1abc9c;
   color: white;
 }
+
 .btn-primary-green:hover {
   background-color: #16a085;
   box-shadow: 0 2px 8px rgba(26, 188, 156, 0.3);
@@ -53,20 +52,22 @@ body {
   color: #333;
   border: 1px solid #ccc;
 }
+
 .btn-secondary:hover {
   background-color: #e0e0e0;
 }
 
-/* --- Header Principal e Filtros --- */
 .main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
 }
+
 .main-header h1 {
   color: #111;
 }
+
 .header-buttons {
   display: flex;
   gap: 10px;
@@ -77,6 +78,7 @@ body {
   gap: 15px;
   margin-bottom: 25px;
 }
+
 .filter-bar input,
 .filter-bar select {
   padding: 10px;
@@ -84,17 +86,18 @@ body {
   border-radius: 4px;
   font-size: 1em;
 }
+
 .filter-bar input {
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
-/* --- Tabela de Transações --- */
 #tabela-section {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 25px;
 }
+
 #tabela-section h2 {
   margin-bottom: 20px;
   color: #333;
@@ -119,7 +122,6 @@ body {
   text-transform: uppercase;
 }
 
-/* "Tags" da Tabela (Pills) */
 .tag {
   padding: 4px 10px;
   border-radius: 12px;
@@ -129,20 +131,52 @@ body {
   background-color: #eee;
   color: #555;
 }
-.tag.status-confirmada { background-color: #d4edda; color: #155724; }
-.tag.status-pendente  { background-color: #fff3cd; color: #856404; }
-/* Exemplo de categorias padrão */
-.tag.categoria-salario       { background-color: #d1e7dd; color: #0f5132; }
-.tag.categoria-alimentacao { background-color: #f8d7da; color: #721c24; }
-.tag.categoria-transporte  { background-color: #cce5ff; color: #004085; }
-.tag.categoria-moradia     { background-color: #e2e3e5; color: #383d41; }
-.tag.categoria-lazer       { background-color: #d6d8f5; color: #20235a; }
 
-/* Cores de Valor */
-.valor-receita { color: #28a745; font-weight: bold; }
-.valor-despesa { color: #dc3545; font-weight: bold; }
+.tag.status-confirmada {
+  background-color: #d4edda;
+  color: #155724;
+}
 
-/* Botões de Ação da Tabela */
+.tag.status-pendente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.tag.categoria-salario {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.tag.categoria-alimentacao {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.tag.categoria-transporte {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.tag.categoria-moradia {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.tag.categoria-lazer {
+  background-color: #d6d8f5;
+  color: #20235a;
+}
+
+.valor-receita {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.valor-despesa {
+  color: #dc3545;
+  font-weight: bold;
+}
+
 .action-buttons button {
   background: none;
   border: none;
@@ -151,11 +185,10 @@ body {
   font-size: 1.1em;
   margin-left: 10px;
 }
-.action-buttons .btn-delete:hover { color: #dc3545; }
 
-/* ============================================= */
-/* --- ESTILOS DO MODAL --- */
-/* ============================================= */
+.action-buttons .btn-delete:hover {
+  color: #dc3545;
+}
 
 .modal-overlay {
   position: fixed;
@@ -163,7 +196,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -179,7 +212,7 @@ body {
 }
 
 .modal-container {
-  background: #ffffff; 
+  background: #ffffff;
   padding: 30px;
   border-radius: 12px;
   width: 100%;
@@ -201,6 +234,7 @@ body {
   padding-bottom: 15px;
   margin-bottom: 20px;
 }
+
 .close-button {
   background: none;
   border: none;
@@ -209,22 +243,26 @@ body {
   color: #888;
 }
 
-/* --- Estilos do Formulário do Modal --- */
-/* 👇 ATUALIZADO: Inclui #form-categoria na regra */
-#form-transacao, #form-meta, #form-categoria {
+#form-transacao,
+#form-meta,
+#form-categoria {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
+
 .form-group {
   display: flex;
   flex-direction: column;
 }
-.form-group label, .tipo-toggle label {
+
+.form-group label,
+.tipo-toggle label {
   font-weight: bold;
   margin-bottom: 5px;
   font-size: 0.9em;
 }
+
 .form-group input,
 .form-group select {
   width: 100%;
@@ -234,13 +272,13 @@ body {
   font-size: 1em;
 }
 
-/* Botões de Tipo (Receita/Despesa) */
 .tipo-toggle {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-bottom: 5px;
 }
+
 .btn-tipo {
   padding: 12px;
   border: 1px solid #ccc;
@@ -251,11 +289,13 @@ body {
   font-weight: bold;
   transition: all 0.2s;
 }
+
 .btn-tipo.ativo-receita {
   background-color: #d4edda;
   border-color: #155724;
   color: #155724;
 }
+
 .btn-tipo.ativo-despesa {
   background-color: #f8d7da;
   border-color: #721c24;
@@ -271,7 +311,6 @@ body {
   margin-top: 10px;
 }
 
-/* 👇 NOVO: Estilos para o Seletor de Cores (Redondo) */
 .color-picker-wrapper {
   display: flex;
   align-items: center;
@@ -287,16 +326,15 @@ input[type="color"] {
   padding: 0;
 }
 
-/* Webkit (Chrome, Edge, Safari) */
 input[type="color"]::-webkit-color-swatch {
   border-radius: 50%;
   border: 2px solid #e0e0e0;
 }
+
 input[type="color"]::-webkit-color-swatch-wrapper {
   padding: 0;
 }
 
-/* Firefox */
 input[type="color"]::-moz-color-swatch {
   border-radius: 50%;
   border: 2px solid #e0e0e0;

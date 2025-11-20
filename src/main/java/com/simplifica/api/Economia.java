@@ -14,21 +14,10 @@ public class Economia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    /**
-     * @ManyToOne: Muitas economias podem pertencer a Uma Meta.
-     * @JoinColumn(name = "meta_id"): A FK.
-     * É 'nullable = false' porque uma economia DEVE estar
-     * ligada a uma meta.
-     */
     @ManyToOne
     @JoinColumn(name = "meta_id", nullable = false)
     private Meta meta;
 
-    /**
-     * O valor economizado.
-     * O nome "economia" foi usado para bater com o
-     * atributo 'name="economia"' do seu formulário HTML.
-     */
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal economia;
 
@@ -39,7 +28,7 @@ public class Economia {
     @Column(nullable = false, updatable = false)
     private LocalDateTime data_criacao;
 
-    // --- Construtores, Getters e Setters ---
+    // Construtores, Getters e Setters
 
     public Economia() {
     }

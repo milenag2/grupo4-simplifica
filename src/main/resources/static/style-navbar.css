@@ -1,4 +1,3 @@
-/* --- Configurações Gerais --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,9 +5,7 @@
 }
 
 body {
-  /* Esta é a linha que corrige a "fonte estranha" */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  
   background-color: #f4f7f6;
   color: #333;
   line-height: 1.6;
@@ -20,7 +17,6 @@ body {
   padding: 25px;
 }
 
-/* --- Salve como: style-navbar.css --- */
 
 .navbar {
   width: 100%;
@@ -29,7 +25,7 @@ body {
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   display: flex;
-  justify-content: space-between; /* Joga o logo para um lado e os links para o outro */
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -37,28 +33,28 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  text-decoration: none; /* Remove o sublinhado do link */
+  text-decoration: none;
   color: #111;
-  font-size: 1.5em; /* 24px */
+  font-size: 1.5em;
   font-weight: bold;
 }
 
 .nav-logo img {
-  width: 32px; /* Tamanho do ícone */
+  width: 32px;
   height: 32px;
 }
 
 .nav-links {
   display: flex;
-  gap: 15px; /* Espaço entre os links */
-  list-style-type: none; /* Remove as bolinhas da lista */
+  gap: 15px;
+  list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #555; /* Cor do link normal */
+  color: #555;
   font-size: 1.1em;
   font-weight: 500;
   padding: 8px 12px;
@@ -67,12 +63,11 @@ body {
 }
 
 .nav-links a:hover {
-  background-color: #f4f7f6; /* Um cinza bem claro no hover */
+  background-color: #f4f7f6;
   color: #111;
 }
 
-/* Esta é a classe mágica que destaca a página atual */
 .nav-links a.active {
-  color: #0056b3; /* Cor azul (do seu botão) */
+  color: #0056b3;
   font-weight: bold;
 }

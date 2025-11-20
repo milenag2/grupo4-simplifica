@@ -1,5 +1,3 @@
-/* --- Estilos da Página de Metas --- */
-
 .btn-primary-green {
   background-color: #1abc9c;
   color: white;
@@ -11,6 +9,7 @@
   font-size: 0.95em;
   transition: background-color 0.2s ease;
 }
+
 .btn-primary-green:hover {
   background-color: #16a085;
 }
@@ -20,15 +19,13 @@
   gap: 10px;
 }
 
-/* --- Header Principal --- */
 .main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px; /* Opcional, mas alinha com o design de transações */
+  margin-bottom: 25px;
 }
 
-/* --- Grid de Estatísticas (Pág. Metas) --- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -45,29 +42,29 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
+
 .stat-icon {
   font-size: 2em;
   padding: 12px;
   border-radius: 50%;
   background-color: #f4f7f6;
 }
+
 .stat-card div {
   display: flex;
   flex-direction: column;
 }
+
 .stat-label {
   color: #666;
   font-size: 0.9em;
 }
+
 .stat-value {
   color: #111;
   font-size: 1.4em;
   font-weight: bold;
 }
-
-/* ============================================= */
-/* --- Lista de Metas (Design Moderno) --- */
-/* ============================================= */
 
 .metas-list h2 {
   font-size: 1.4em;
@@ -76,53 +73,44 @@
 }
 
 .meta-card {
-  /* ✨ Define a cor principal do card (azul, neste caso) */
-  --cor-meta-principal: #3498db; 
-  /* (Para o verde, seria: #2ecc71) */
-  /* (Para o laranja, seria: #f39c12) */
-
+  --cor-meta-principal: #3498db;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
   padding: 15px 20px;
   margin-bottom: 20px;
-  
-  /* A borda colorida da imagem */
   border: 1px solid #f0f0f0;
   border-left: 6px solid var(--cor-meta-principal);
-  
-  /* Um fundo levemente colorido para combinar */
-  background-image: linear-gradient(to right, 
-    hsla(from var(--cor-meta-principal) h s l / 0.05), 
-    #ffffff 30%
-  );
+  background-image: linear-gradient(to right,
+      hsla(from var(--cor-meta-principal) h s l / 0.05),
+      #ffffff 30%);
 }
 
-/* --- Cabeçalho do Card (Ícone, Título, Valor) --- */
 .meta-card-header {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 5px;
 }
+
 .meta-icon {
   font-size: 1.4em;
   padding: 12px;
   border-radius: 10px;
-  
-  /* Usa a cor principal */
   background-color: var(--cor-meta-principal);
   color: white;
 }
 
 .meta-details {
-  flex-grow: 1; /* Ocupa o espaço do meio */
+  flex-grow: 1;
 }
+
 .meta-details h3 {
   margin: 0;
   font-size: 1.25em;
   color: #222;
 }
+
 .meta-details p {
   margin: 0;
   color: #666;
@@ -131,19 +119,20 @@
 
 .meta-amount {
   text-align: right;
-  flex-shrink: 0; /* Não encolhe */
+  flex-shrink: 0;
 }
+
 .meta-amount .meta-target-value {
   font-size: 1.3em;
   font-weight: bold;
   color: #333;
 }
+
 .meta-amount .meta-target-date {
   color: #777;
   font-size: 0.9em;
 }
 
-/* --- Progresso (Rótulos e Barra) --- */
 .meta-card-progress {
   margin-bottom: 10px;
 }
@@ -155,38 +144,37 @@
   color: #555;
   margin-bottom: 4px;
 }
+
 .progress-percent {
   font-weight: bold;
-  /* Usa a cor principal */
   color: var(--cor-meta-principal);
 }
 
 .progress-bar-container {
   width: 100%;
-  background-color: #eef1f5; /* Fundo da barra mais escuro */
+  background-color: #eef1f5;
   border-radius: 25px;
   height: 12px;
 }
+
 .progress-bar-fill {
   height: 100%;
-  /* Usa a cor principal */
-  background-color: var(--cor-meta-principal); 
+  background-color: var(--cor-meta-principal);
   border-radius: 25px;
   transition: width 0.5s ease-in-out;
 }
 
-/* --- Rodapé do Card --- */
 .meta-card-footer {
   display: flex;
   justify-content: space-between;
   font-size: 0.95em;
 }
+
 .meta-remaining {
   color: #555;
   font-weight: 500;
 }
 
-/* --- Barra de Progresso --- */
 .progress-bar-container {
   width: 100%;
   background-color: #e0e0e0;
@@ -194,9 +182,10 @@
   height: 10px;
   margin: 10px 0;
 }
+
 .progress-bar-fill {
   height: 100%;
-  background-color: #1abc9c; 
+  background-color: #1abc9c;
   border-radius: 25px;
   transition: width 0.5s ease-in-out;
 }
@@ -207,6 +196,7 @@
   font-size: 0.9em;
   color: #333;
 }
+
 .progress-percent {
   font-weight: bold;
   color: #1abc9c;
@@ -220,19 +210,16 @@
   margin-top: 15px;
   font-size: 0.9em;
 }
+
 .meta-remaining {
   color: #555;
 }
+
 .meta-monthly {
   color: #28a745;
   font-weight: bold;
 }
 
-/* ============================================= */
-/* --- ESTILOS DO MODAL (Usado por várias páginas) --- */
-/* ============================================= */
-
-/* --- Botões Principais (Movidos para cá para aplicar nos modais) --- */
 .btn {
   padding: 10px 18px;
   border: none;
@@ -247,6 +234,7 @@
   background-color: #0056b3;
   color: white;
 }
+
 .btn-primary:hover {
   background-color: #004a91;
   box-shadow: 0 2px 8px rgba(0, 86, 179, 0.3);
@@ -256,19 +244,19 @@
   background-color: #0056b3;
   color: white;
 }
+
 .btn-secondary:hover {
   background-color: #004a91;
   box-shadow: 0 2px 8px rgba(0, 86, 179, 0.3);
 }
 
-/* --- Estilos do Modal (Overlay e Animação) --- */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -284,7 +272,7 @@
 }
 
 .modal-container {
-  background: #ffffff; 
+  background: #ffffff;
   padding: 30px;
   border-radius: 12px;
   width: 100%;
@@ -306,6 +294,7 @@
   padding-bottom: 15px;
   margin-bottom: 20px;
 }
+
 .close-button {
   background: none;
   border: none;
@@ -314,24 +303,27 @@
   color: #888;
 }
 
-/* --- Estilos do Formulário do Modal --- */
-#form-transacao, #form-meta {
+#form-transacao,
+#form-meta {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-height: 70vh; 
+  max-height: 70vh;
   overflow-y: auto;
   padding-right: 5px;
 }
+
 .form-group {
   display: flex;
   flex-direction: column;
 }
+
 .form-group label {
   font-weight: bold;
   margin-bottom: 5px;
   font-size: 0.9em;
 }
+
 .form-group input,
 .form-group select {
   width: 100%;
@@ -352,12 +344,11 @@
 
 .color-picker-wrapper {
   display: flex;
-  align-items: center; /* Centraliza verticalmente */
-  gap: 10px; /* Espaço entre a cor e o texto */
+  align-items: center;
+  gap: 10px;
   padding: 5px 0;
 }
 
-/* Remove a borda padrão feia do input color (opcional) */
 input[type="color"] {
   border: none;
   width: 60px;

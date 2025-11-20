@@ -1,18 +1,17 @@
-/* --- Estilos da Página do Dashboard --- */
-
 .main-header {
   margin-bottom: 25px;
 }
+
 .main-header h1 {
   color: #111;
   margin: 0;
 }
+
 .subtitle {
   color: #555;
   font-size: 1.1em;
 }
 
-/* --- Grid de Estatísticas --- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -45,27 +44,33 @@
   font-size: 1em;
   margin-bottom: 5px;
 }
+
 .stat-value {
   color: #111;
   font-size: 2em;
   font-weight: bold;
 }
+
 .stat-change {
   font-size: 0.9em;
   margin-top: 10px;
 }
-.text-green { color: #28a745; }
-.text-red   { color: #dc3545; }
+
+.text-green {
+  color: #28a745;
+}
+
+.text-red {
+  color: #dc3545;
+}
 
 
-/* --- Grid de Gráficos --- */
 .charts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-/* Em telas menores, os gráficos ficam em 1 coluna */
 @media (max-width: 900px) {
   .charts-grid {
     grid-template-columns: 1fr;
@@ -78,16 +83,17 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
+
 .chart-container h3 {
   margin-bottom: 20px;
   text-align: center;
 }
 
-/* Limita o tamanho dos gráficos (Donut e Histórico) */
-#donutChart, #historyChart {
+#donutChart,
+#historyChart {
   max-height: 350px;
   margin: 0 auto;
-  width: 100%; /* Garante que ocupe a largura disponível */
+  width: 100%;
 }
 
 .chart-placeholder {

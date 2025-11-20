@@ -16,56 +16,35 @@ public class MetaController {
   @Autowired
   private MetaRepository metaRepository;
 
-  /**
-   * Precisamos do CategoriaRepository para "anexar" a categoria
-   * à meta, caso o usuário especifique uma.
-   */
   @Autowired
   private CategoriaRepository categoriaRepository;
 
-  // --- CREATE (Criar) ---
-  /**
-   * @PostMapping: Mapeia requisições HTTP POST para /metas.
-   */
   @PostMapping
   public ResponseEntity<Meta> criarMeta(@RequestBody Meta meta) {
 
-    // Lógica de relacionamento opcional (igual ao TransacaoController)
     if (meta.getCategoria() != null && meta.getCategoria().getId() != null) {
       Integer categoriaId = meta.getCategoria().getId();
 
-      // Busca a categoria no banco
       Categoria categoria = categoriaRepository.findById(categoriaId)
           .orElseThrow(() -> new RuntimeException("Categoria não encontrada com id: " + categoriaId));
 
-      // Anexa a categoria completa à meta
       meta.setCategoria(categoria);
     } else {
-      // Se o usuário não enviou uma categoria, ela fica nula (meta geral)
       meta.setCategoria(null);
     }
 
-    // O valorAtual deve sempre começar com 0, ignorando o que o usuário enviar
     meta.setValorAtual(BigDecimal.ZERO);
 
     Meta novaMeta = metaRepository.save(meta);
     return ResponseEntity.status(HttpStatus.CREATED).body(novaMeta);
   }
 
-  // --- READ (Ler Todos) ---
-  /**
-   * @GetMapping: Mapeia requisições HTTP GET para /metas.
-   */
   @GetMapping
   public ResponseEntity<List<Meta>> listarMetas() {
     List<Meta> metas = (List<Meta>) metaRepository.findAll();
     return ResponseEntity.ok(metas);
   }
 
-  // --- UPDATE (Atualizar) ---
-  /**
-   * @PutMapping("/{id}"): Mapeia requisições HTTP PUT.
-   */
   @PutMapping("/{id}")
   public ResponseEntity<Meta> atualizarMeta(@PathVariable Integer id,
       @RequestBody Meta metaAtualizada) {
@@ -78,7 +57,6 @@ public class MetaController {
 
     Meta metaExistente = metaExistenteOpt.get();
 
-    // LÓGICA DE RELACIONAMENTO (igual ao POST)
     if (metaAtualizada.getCategoria() != null && metaAtualizada.getCategoria().getId() != null) {
       Integer categoriaId = metaAtualizada.getCategoria().getId();
       Categoria categoria = categoriaRepository.findById(categoriaId)
@@ -88,7 +66,6 @@ public class MetaController {
       metaExistente.setCategoria(null);
     }
 
-    // Atualiza os outros campos
     metaExistente.setNome(metaAtualizada.getNome());
     metaExistente.setValorAlvo(metaAtualizada.getValorAlvo());
     metaExistente.setPeriodo(metaAtualizada.getPeriodo());
@@ -99,10 +76,6 @@ public class MetaController {
     return ResponseEntity.ok(metaSalva);
   }
 
-  // --- DELETE (Deletar) ---
-  /**
-   * @DeleteMapping("/{id}"): Mapeia requisições HTTP DELETE.
-   */
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deletarMeta(@PathVariable Integer id) {
 

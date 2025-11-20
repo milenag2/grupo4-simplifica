@@ -11,38 +11,29 @@ public class Meta {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id; // meta_id
+  private Integer id;
 
-  /**
-   * @ManyToOne: Muitas metas podem estar ligadas a Uma Categoria.
-   * @JoinColumn(name = "categoria_id", nullable = true):
-   *                  A FK é opcional (nullable = true), permitindo metas gerais.
-   */
   @ManyToOne
   @JoinColumn(name = "categoria_id", nullable = true)
-  private Categoria categoria; // categoria_id
+  private Categoria categoria;
 
   @Column(nullable = false, length = 255)
-  private String nome; // nome_meta
+  private String nome;
 
   @Column(nullable = false, precision = 10, scale = 2)
-  private BigDecimal valorAlvo; // valor_alvo
+  private BigDecimal valorAlvo;
 
-  /**
-   * O valor_atual será calculado pelo backend.
-   * Começa com 0.00 por padrão.
-   */
   @Column(nullable = false, precision = 10, scale = 2)
-  private BigDecimal valorAtual = BigDecimal.ZERO; // valor_atual
+  private BigDecimal valorAtual = BigDecimal.ZERO;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private PeriodoMeta periodo;
 
   @Column
-  private Integer mes; // Pode ser nulo se o período for ANUAL
+  private Integer mes;
 
-  @Column(length = 7) 
+  @Column(length = 7)
   private String cor;
 
   @Column(nullable = false)
@@ -52,13 +43,12 @@ public class Meta {
   @Column(nullable = false, updatable = false)
   private LocalDateTime data_criacao;
 
-  // --- Enums ---
   public enum PeriodoMeta {
     MENSAL,
     ANUAL
   }
 
-  // --- Construtor, Getters e Setters ---
+  // Construtor, Getters e Setters
   public Meta() {
   }
 
@@ -119,11 +109,11 @@ public class Meta {
   }
 
   public String getCor() {
-      return cor;
-   }
+    return cor;
+  }
 
   public void setCor(String cor) {
-      this.cor = cor;
+    this.cor = cor;
   }
 
   public Integer getAno() {
