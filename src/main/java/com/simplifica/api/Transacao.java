@@ -42,7 +42,7 @@ public class Transacao {
     DESPESA
   }
 
-  // --- Construtores ---
+  // Construtores 
   public Transacao() {}
 
   // --- Getters e Setters (Sem Status) ---
