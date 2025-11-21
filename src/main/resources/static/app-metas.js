@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const API_URL = "http://localhost:8080";
+  // ERRO CORRIGIDO: Uso de crases (`) para template literals
   const CATEGORIAS_URL = `${API_URL}/categorias`;
   const METAS_URL = `${API_URL}/metas`;
   const ECONOMIAS_URL = `${API_URL}/economias`;
@@ -47,11 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
   modalMetaOverlay.addEventListener("click", (e) => {
     if (e.target === modalMetaOverlay) fecharModalMeta();
   });
+
   function fecharModalMeta() {
     modalMetaOverlay.classList.remove("ativo");
     formMeta.reset();
     campoMes.style.display = 'none';
-    if (spanHex) { spanHex.textContent = "#3498db"; spanHex.style.color = "#3498db"; }
+    if (spanHex) {
+      spanHex.textContent = "#3498db";
+      spanHex.style.color = "#3498db";
+    }
   }
 
   selectPeriodo.addEventListener("change", () => {
@@ -80,7 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  const formatadorBRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  const formatadorBRL = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  });
 
   async function carregarCategorias() {
     try {
@@ -91,10 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
       categorias.forEach(categoria => {
         const option = document.createElement("option");
         option.value = categoria.id;
+        // ERRO CORRIGIDO: Uso de crases no option.textContent
         option.textContent = `${categoria.nome}`;
         selectCategoria.appendChild(option);
       });
-    } catch (error) { console.error(error); }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function carregarMetasParaSelect() {
@@ -103,16 +114,22 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) throw new Error("Falha ao carregar metas.");
       const metas = await response.json();
       selectMeta.innerHTML = '<option value="">Selecione uma meta</option>';
-      if (metas.length === 0) { selectMeta.innerHTML = '<option value="">Nenhuma meta criada</option>'; return; }
+      if (metas.length === 0) {
+        selectMeta.innerHTML = '<option value="">Nenhuma meta criada</option>';
+        return;
+      }
 
       metas.forEach(meta => {
         const option = document.createElement("option");
         option.value = meta.id;
+        // ERRO CORRIGIDO: Uso de crases no template literal
         const textoPeriodo = meta.periodo === 'MENSAL' ? `(${meta.periodo} - ${meta.mes}/${meta.ano})` : `(${meta.periodo} - ${meta.ano})`;
         option.textContent = `${meta.nome} ${textoPeriodo}`;
         selectMeta.appendChild(option);
       });
-    } catch (error) { console.error(error); }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function carregarDashboard() {
@@ -122,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const [dashboardResponse, metasResponse, economiasResponse] = await Promise.all([
+        // ERRO CORRIGIDO: Uso de crases no fetch URL
         fetch(`${DASHBOARD_URL}?mes=${mesAtual}&ano=${anoAtual}`),
         fetch(METAS_URL),
         fetch(ECONOMIAS_URL)
@@ -139,17 +157,24 @@ document.addEventListener("DOMContentLoaded", () => {
         return parseInt(ano) === anoAtual && parseInt(mes) === mesAtual;
       });
       const totalEconomizadoMes = economiasDoMes.reduce((total, item) => total + item.economia, 0);
+
       const metasContadorAtivas = todasAsMetas.filter(meta => {
-        if (meta.ano > anoAtual) return true;
+        const naoAtingiuMeta = meta.valorAtual < meta.valorAlvo;
+        let prazoValido = false;
 
-        if (meta.ano < anoAtual) return false;
-
-        if (meta.periodo === 'MENSAL') {
-          return meta.mes >= mesAtual;
+        if (meta.ano > anoAtual) {
+          prazoValido = true;
+        } else if (meta.ano === anoAtual) {
+          if (meta.periodo === 'MENSAL') {
+            prazoValido = meta.mes >= mesAtual;
+          } else {
+            prazoValido = true;
+          }
         }
 
-        return true;
+        return naoAtingiuMeta && prazoValido;
       });
+
       const totalCriadas = todasAsMetas.length;
       const totalConcluidas = todasAsMetas.filter(m => m.valorAtual >= m.valorAlvo).length;
 
@@ -160,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       statSaldo.textContent = formatadorBRL.format(totalEconomizado || 0);
       statReceitaMes.textContent = formatadorBRL.format(totalEconomizadoMes || 0);
+      // ERRO CORRIGIDO: Uso de crases
       statMetas.textContent = `${metasContadorAtivas.length} ${metasContadorAtivas.length === 1 ? 'ativa' : 'ativas'}`;
       statSucesso.textContent = `${taxaSucesso.toFixed(0)}%`;
 
@@ -220,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     div.style.setProperty('--cor-meta-principal', corTema);
 
+    // O template literal do innerHTML precisa estar cercado por crases (`)
     div.innerHTML = `
       <div class="meta-card-header">
         <div class="meta-details">
@@ -246,31 +273,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="meta-card-footer">
         <span class="meta-remaining">
-            ${isConcluida && percentual >= 100 ? 'Meta Concluída!' : `Faltam ${formatadorBRL.format(restante)}`}
+          ${isConcluida && percentual >= 100 ? 'Meta Concluída!' : `Faltam ${formatadorBRL.format(restante)}`}
         </span>
       </div>
     `;
     container.appendChild(div);
   }
+  
   formMeta.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData(formMeta);
     const categoriaId = formData.get("categoria");
 
+    const valorAlvoInput = formData.get("valorAlvo");
+
+    // CORREÇÃO ADICIONAL: Tratar vírgula (,) como separador decimal para o padrão brasileiro
+    const valorAlvoCorrigido = valorAlvoInput.replace(',', '.');
+
     const metaData = {
       nome: formData.get("nome"),
-      valorAlvo: parseFloat(formData.get("valorAlvo")),
+      valorAlvo: parseFloat(valorAlvoCorrigido),
       periodo: formData.get("periodo"),
       mes: formData.get("periodo") === "MENSAL" ? parseInt(formData.get("mes")) : null,
       ano: parseInt(formData.get("ano")),
-      categoria: categoriaId ? { id: parseInt(categoriaId) } : null,
+      categoria: categoriaId ? {
+        id: parseInt(categoriaId)
+      } : null,
       cor: formData.get("cor")
     };
 
     try {
       const response = await fetch(METAS_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(metaData),
       });
       if (!response.ok) throw new Error("Falha ao salvar meta.");
@@ -286,22 +323,36 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
     const formData = new FormData(formEconomia);
     const metaId = formData.get("meta");
-    const valorEconomia = formData.get("economia");
+    const valorEconomiaInput = formData.get("economia");
     const dataEconomia = formData.get("data_economia");
 
-    if (!metaId) { alert("Selecione uma meta."); return; }
-    if (!dataEconomia) { alert("Selecione uma data."); return; }
+    if (!metaId) {
+      alert("Selecione uma meta.");
+      return;
+    }
+    if (!dataEconomia) {
+      alert("Selecione uma data.");
+      return;
+    }
+    
+    // CORREÇÃO ADICIONAL: Tratar vírgula (,) como separador decimal
+    const valorEconomiaCorrigido = valorEconomiaInput.replace(',', '.');
+
 
     const economiaData = {
-      meta: { id: parseInt(metaId) },
-      economia: parseFloat(valorEconomia),
+      meta: {
+        id: parseInt(metaId)
+      },
+      economia: parseFloat(valorEconomiaCorrigido),
       data: dataEconomia
     };
 
     try {
       const response = await fetch(ECONOMIAS_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(economiaData),
       });
       if (!response.ok) throw new Error("Falha ao salvar economia.");
